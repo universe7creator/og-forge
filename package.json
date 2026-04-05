@@ -1,0 +1,19 @@
+{
+  "name": "og-forge",
+  "version": "1.0.0",
+  "description": "Dynamic Open Graph Image Generator API",
+  "main": "api/health.js",
+  "scripts": {
+    "start": "vercel dev",
+    "build": "echo 'No build step required'"
+  },
+  "dependencies": {
+    "satori": "^0.10.11",
+    "@resvg/resvg-js": "^2.6.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18"
+  }
+}

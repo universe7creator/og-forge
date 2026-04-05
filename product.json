@@ -1,0 +1,25 @@
+{
+  "name": "OG Forge",
+  "slug": "og-forge",
+  "tagline": "Dynamic Open Graph Image Generator API",
+  "description": "Generate stunning Open Graph images for social media with Satori + Vercel Edge Functions. Multiple templates, themes, and full customization.",
+  "price": "$29",
+  "version": "1.0.0",
+  "status": "building",
+  "vercel_url": null,
+  "github_url": null,
+  "lemon_checkout_url": null,
+  "webhook_url": null,
+  "revenue": 0,
+  "created_at": "2026-04-04",
+  "updated_at": "2026-04-05",
+  "features": [
+    "5 Templates: Blog, Product, Quote, Event, Profile",
+    "4 Themes: Light, Dark, Brand, Minimal",
+    "Custom Fonts Support",
+    "Edge Cached Images",
+    "One-time Payment"
+  ],
+  "api_endpoint": "/api/og",
+  "tech_stack": ["Vercel Edge", "Satori", "React", "Tailwind CSS"]
+}

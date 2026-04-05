@@ -1,0 +1,251 @@
+{
+  "name": "OG Forge",
+  "tagline": "Dynamic Open Graph Image Generator API",
+  "version": "1.0.0",
+  "price": "$29 one-time",
+  "target_audience": ["blog_yazarlari", "saas_founder", "content_creator", "developer"],
+  "problem": "Developer'lar ve content creator'lar sosyal medya paylaşımları için özel OG (Open Graph) görselleri oluşturmakta zorlanıyor. Mevcut çözümler ya ücretli API'ler ya da kendi sunucularını kurmayı gerektiriyor",
+  "solution": "Satori + Vercel Edge Function ile gerçek zamanlı OG image üretimi. React component tabanlı template'ler, dinamik veri entegrasyonu",
+  "tech_stack": {
+    "runtime": "Vercel Edge Functions",
+    "renderer": "Satori",
+    "framework": "React",
+    "styling": "Tailwind CSS",
+    "payment": "Stripe"
+  },
+  "mvp_complexity": "1-2 cycle",
+  "api": {
+    "base_url": "https://ogforge.api/",
+    "endpoints": [
+      {
+        "path": "/api/og",
+        "method": "GET",
+        "description": "Generate Open Graph image from URL parameters",
+        "parameters": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Main title text",
+            "max_length": 100
+          },
+          "subtitle": {
+            "type": "string",
+            "required": false,
+            "description": "Subtitle or description",
+            "max_length": 200
+          },
+          "image": {
+            "type": "string (URL)",
+            "required": false,
+            "description": "Background image URL"
+          },
+          "template": {
+            "type": "string",
+            "required": false,
+            "default": "blog",
+            "enum": ["blog", "product", "quote", "event", "profile"],
+            "description": "Template style"
+          },
+          "theme": {
+            "type": "string",
+            "required": false,
+            "default": "dark",
+            "enum": ["light", "dark", "brand", "minimal"],
+            "description": "Color theme"
+          },
+          "logo": {
+            "type": "string (URL)",
+            "required": false,
+            "description": "Logo image URL"
+          },
+          "author": {
+            "type": "string",
+            "required": false,
+            "description": "Author name for blog template"
+          },
+          "date": {
+            "type": "string",
+            "required": false,
+            "description": "Publication date"
+          }
+        },
+        "response": {
+          "type": "image/png",
+          "dimensions": "1200x630",
+          "cache": "Edge cached 24h"
+        },
+        "examples": [
+          {
+            "url": "/api/og?title=Next.js+14+Guide&subtitle=Complete+tutorial+for+beginners&template=blog&theme=dark&author=John+Doe",
+            "description": "Blog post OG image"
+          },
+          {
+            "url": "/api/og?title=SaaS+Starter&subtitle=Launch+your+startup+in+days&template=product&theme=brand&logo=https://example.com/logo.png",
+            "description": "Product launch OG image"
+          }
+        ]
+      },
+      {
+        "path": "/api/og/custom",
+        "method": "POST",
+        "description": "Generate OG image with custom React component",
+        "body": {
+          "component": {
+            "type": "string (base64 encoded React component)",
+            "required": true
+          },
+          "props": {
+            "type": "object",
+            "required": false,
+            "description": "Props to pass to component"
+          },
+          "width": {
+            "type": "number",
+            "default": 1200
+          },
+          "height": {
+            "type": "number",
+            "default": 630
+          }
+        },
+        "response": {
+          "imageUrl": "string",
+          "expiresAt": "timestamp"
+        }
+      }
+    ]
+  },
+  "templates": [
+    {
+      "id": "blog",
+      "name": "Blog Post",
+      "description": "Article/blog post preview with title, subtitle, author",
+      "layout": "vertical",
+      "elements": ["title", "subtitle", "author", "date", "logo"]
+    },
+    {
+      "id": "product",
+      "name": "Product Launch",
+      "description": "Product/feature announcement with bold title",
+      "layout": "centered",
+      "elements": ["title", "subtitle", "logo", "cta"]
+    },
+    {
+      "id": "quote",
+      "name": "Quote/Tweet",
+      "description": "Social media quote card",
+      "layout": "centered",
+      "elements": ["quote", "author", "avatar"]
+    },
+    {
+      "id": "event",
+      "name": "Event/Conference",
+      "description": "Event announcement with date and location",
+      "layout": "split",
+      "elements": ["title", "date", "location", "logo"]
+    },
+    {
+      "id": "profile",
+      "name": "User Profile",
+      "description": "Personal profile card",
+      "layout": "horizontal",
+      "elements": ["avatar", "name", "title", "bio"]
+    }
+  ],
+  "themes": {
+    "light": {
+      "bg": "#ffffff",
+      "text": "#000000",
+      "accent": "#3b82f6"
+    },
+    "dark": {
+      "bg": "#000000",
+      "text": "#ffffff",
+      "accent": "#60a5fa"
+    },
+    "brand": {
+      "bg": "gradient",
+      "text": "#ffffff",
+      "accent": "custom"
+    },
+    "minimal": {
+      "bg": "#f3f4f6",
+      "text": "#1f2937",
+      "accent": "#6b7280"
+    }
+  },
+  "fonts": [
+    "Inter",
+    "Roboto",
+    "Playfair Display",
+    "JetBrains Mono"
+  ],
+  "implementation": {
+    "phase_1": {
+      "name": "Core API",
+      "tasks": [
+        "Setup Vercel Edge Function",
+        "Integrate Satori",
+        "Create base template system",
+        "Implement blog template",
+        "Add dark/light themes"
+      ],
+      "duration": "1 cycle"
+    },
+    "phase_2": {
+      "name": "Templates & Polish",
+      "tasks": [
+        "Add product, quote templates",
+        "Implement custom fonts",
+        "Add image overlay support",
+        "Create documentation",
+        "Setup Stripe payment"
+      ],
+      "duration": "1 cycle"
+    }
+  },
+  "market_analysis": {
+    "competitors": [
+      {
+        "name": "Vercel OG Image",
+        "price": "Free (self-hosted)",
+        "pros": ["Free", "Official"],
+        "cons": ["Requires setup", "Limited templates"]
+      },
+      {
+        "name": "Bannerbear",
+        "price": "$49/month",
+        "pros": ["No-code", "Many templates"],
+        "cons": ["Expensive", "Subscription"]
+      },
+      {
+        "name": "Dynamic OG",
+        "price": "$19/month",
+        "pros": ["Simple API"],
+        "cons": ["Monthly fee", "Limited customization"]
+      }
+    ],
+    "advantage": "One-time payment + Full customization + Vercel Edge speed"
+  },
+  "pricing_strategy": {
+    "model": "one-time",
+    "price": "$29",
+    "tiers": [
+      {
+        "name": "Starter",
+        "price": "$29",
+        "features": [
+          "Unlimited OG images",
+          "5 templates",
+          "4 themes",
+          "Basic support"
+        ]
+      }
+    ]
+  },
+  "estimated_revenue": {
+    " conservative": "10 sales/month = $290",
+    "moderate": "50 sales/month = $1,450",
+    "optimistic": "100 sales/month = $2,900"
+  }
+}

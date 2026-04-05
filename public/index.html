@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OG Forge - Dynamic Open Graph Image Generator</title>
+  <meta name="description" content="Generate stunning Open Graph images for social media with Satori + Vercel Edge Functions. Multiple templates, themes, and full customization. One-time payment.">
+  <meta property="og:title" content="OG Forge - Dynamic OG Image Generator">
+  <meta property="og:description" content="Create beautiful Open Graph images in seconds. 5 templates, 4 themes, unlimited generations.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://og-forge.vercel.app">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OG Forge - Dynamic OG Image Generator">
+  <meta name="twitter:description" content="Create beautiful Open Graph images in seconds. 5 templates, 4 themes, unlimited generations.">
+  <link rel="canonical" href="https://og-forge.vercel.app">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --bg-card-hover: rgba(255, 255, 255, 0.06);
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-primary: #8b5cf6;
+      --accent-secondary: #3b82f6;
+      --accent-tertiary: #ec4899;
+      --accent-glow: rgba(139, 92, 246, 0.5);
+      --success: #22c55e;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.05) 0%, transparent 70%);
+      animation: bgPulse 15s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgPulse {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    /* Grid Pattern */
+    .grid-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 10px;
+      font-size: 1.25rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover { color: var(--text-primary); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: white;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px var(--accent-glow);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 10rem 0 6rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .hero-badge span {
+      color: var(--success);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.8s ease-out 0.1s both;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--accent-tertiary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease-out 0.3s both;
+    }
+
+    .btn-large {
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+    }
+
+    .btn-glow {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0% { left: -100%; }
+      50%, 100% { left: 100%; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Trust Badges */
+    .trust-badges {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .trust-badge svg {
+      width: 18px;
+      height: 18px;
+      color: var(--success);
+    }
+
+    /* Demo Section */
+    .demo-section {
+      padding: 4rem 0;
+      animation: fadeInUp 0.8s ease-out 0.5s both;
+    }
+
+    .demo-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .demo-preview {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 16px;
+      padding: 2rem;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .demo-preview::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.2), transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(59, 130, 246, 0.15), transparent 60%);
+    }
+
+    .demo-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .demo-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .demo-subtitle {
+      color: var(--accent-secondary);
+      font-size: 1rem;
+    }
+
+    .demo-form {
+      display: grid;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .demo-input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+
+    .demo-input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+    }
+
+    .demo-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .demo-select {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .demo-select option {
+      background: var(--bg-secondary);
+    }
+
+    /* Features */
+    .features {
+      padding: 6rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 14px;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* How It Works */
+    .how-it-works {
+      padding: 6rem 0;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      position: relative;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 50%;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin: 0 auto 1.5rem;
+    }
+
+    .step h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .step p {
+      color: var(--text-secondary);
+    }
+
+    /* Pricing */
+    .pricing {
+      padding: 6rem 0;
+    }
+
+    .pricing-card {
+      max-width: 450px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+    }
+
+    .pricing-card.featured {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 60px var(--accent-glow);
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      padding: 0.375rem 0.875rem;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-amount {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-amount span {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+    }
+
+    .pricing-period {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-features li {
+      padding: 0.75rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-features li:last-child {
+      border-bottom: none;
+    }
+
+    .pricing-features svg {
+      width: 20px;
+      height: 20px;
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    .btn-pricing {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .pricing-guarantee {
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* FAQ */
+    .faq {
+      padding: 6rem 0;
+    }
+
+    .faq-grid {
+      display: grid;
+      gap: 1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.25rem 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question:hover {
+      color: var(--accent-primary);
+    }
+
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item[open] .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 1.5rem 1.5rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 0 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+    }
+
+    .footer-copy {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { padding: 8rem 0 4rem; }
+      .hero h1 { font-size: 2.25rem; }
+      .hero p { font-size: 1rem; }
+      .trust-badges { gap: 1rem; }
+      .features-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="grid-pattern"></div>
+
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <div class="logo-icon">🔥</div>
+        OG Forge
+      </div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="#pricing" class="btn btn-primary">Get Started</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">
+          <span>✨</span> One-time payment, lifetime access
+        </div>
+        <h1>
+          Generate Stunning<br>
+          <span class="gradient-text">Open Graph Images</span><br>
+          in Seconds
+        </h1>
+        <p>
+          Create beautiful OG images for social media with 5 templates, 4 themes,
+          and unlimited generations. Built on Satori + Vercel Edge for blazing fast performance.
+        </p>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn btn-primary btn-large btn-glow">Start Free Trial</a>
+          <a href="#demo" class="btn btn-large" style="background: var(--bg-card); border: 1px solid var(--border);">Try Demo</a>
+        </div>
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            No signup required
+          </div>
+          <div class="trust-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            Instant generation
+          </div>
+          <div class="trust-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" /></svg>
+            Edge cached
+          </div>
+          <div class="trust-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+            Secure & private
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+      <div class="container">
+        <div class="demo-container">
+          <div class="demo-preview">
+            <div class="demo-content">
+              <div class="demo-title" id="preview-title">Your Title Here</div>
+              <div class="demo-subtitle" id="preview-subtitle">Your subtitle goes here</div>
+            </div>
+          </div>
+          <div class="demo-form">
+            <input type="text" class="demo-input" id="input-title" placeholder="Enter title..." value="Next.js 14 Guide" />
+            <input type="text" class="demo-input" id="input-subtitle" placeholder="Enter subtitle..." value="Complete tutorial for beginners" />
+            <select class="demo-select" id="input-template">
+              <option value="blog">Blog Post Template</option>
+              <option value="product">Product Launch Template</option>
+              <option value="quote">Quote Template</option>
+              <option value="event">Event Template</option>
+              <option value="profile">Profile Template</option>
+            </select>
+            <select class="demo-select" id="input-theme">
+              <option value="dark">Dark Theme</option>
+              <option value="light">Light Theme</option>
+              <option value="brand">Brand Theme</option>
+              <option value="minimal">Minimal Theme</option>
+            </select>
+            <button class="btn btn-primary" onclick="generatePreview()" style="width: 100%;">Generate Preview</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>Everything You Need</h2>
+          <p>Powerful features to create the perfect OG image every time</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📄</div>
+            <h3>5 Templates</h3>
+            <p>Blog posts, product launches, quotes, events, and profile cards - pre-designed for every use case</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>4 Themes</h3>
+            <p>Light, dark, brand, and minimal themes to match your brand identity perfectly</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Edge Cached</h3>
+            <p>Images generated on Vercel Edge for sub-100ms response times globally</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔤</div>
+            <h3>Custom Fonts</h3>
+            <p>Support for Inter, Roboto, Playfair Display, JetBrains Mono and more</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🖼️</div>
+            <h3>Background Images</h3>
+            <p>Upload custom backgrounds or use our built-in gradients and patterns</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔗</div>
+            <h3>Easy Integration</h3>
+            <p>Simple API with URL parameters. Just add to your meta tags and you're done</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <h2>How It Works</h2>
+          <p>Generate OG images in three simple steps</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Choose Template</h3>
+            <p>Select from 5 pre-built templates designed for different content types</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Add Your Content</h3>
+            <p>Pass title, subtitle, and other parameters via URL or API</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Get Your Image</h3>
+            <p>Receive a cached OG image ready to use in your meta tags</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <div class="section-header">
+          <h2>Simple Pricing</h2>
+          <p>One-time payment, lifetime access</p>
+        </div>
+        <div class="pricing-card featured">
+          <div class="pricing-badge">BEST VALUE</div>
+          <div class="pricing-amount">$29<span></span></div>
+          <div class="pricing-period">one-time payment</div>
+          <ul class="pricing-features">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Unlimited OG image generations
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              All 5 templates included
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              All 4 themes included
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Custom fonts support
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Background image upload
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              24-hour edge caching
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Priority support
+            </li>
+          </ul>
+          <button class="btn btn-primary btn-pricing" onclick="purchase()">Get Started Now</button>
+          <p class="pricing-guarantee">30-day money-back guarantee</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <h2>Frequently Asked Questions</h2>
+          <p>Got questions? We've got answers</p>
+        </div>
+        <div class="faq-grid">
+          <details class="faq-item">
+            <summary class="faq-question">
+              How do I use OG Forge?
+              <span class="faq-icon">+</span>
+            </summary>
+            <div class="faq-answer">
+              Simply call our API with your desired parameters. For example:
+              <code>/api/og?title=My+Post&template=blog&theme=dark</code>
+              Add the resulting URL to your og:image meta tag.
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">
+              Is there a free trial?
+              <span class="faq-icon">+</span>
+            </summary>
+            <div class="faq-answer">
+              Yes! You can test the API with limited requests before purchasing.
+              The demo above shows exactly what your images will look like.
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">
+              What payment methods do you accept?
+              <span class="faq-icon">+</span>
+            </summary>
+            <div class="faq-answer">
+              We accept all major credit cards, PayPal, and crypto via LemonSqueezy.
+              One-time payment means no recurring charges, ever.
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">
+              Can I use this for commercial projects?
+              <span class="faq-icon">+</span>
+            </summary>
+            <div class="faq-answer">
+              Absolutely! Your purchase includes unlimited commercial use.
+              Use OG Forge for as many projects as you like.
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">
+              How long does image generation take?
+              <span class="faq-icon">+</span>
+            </summary>
+            <div class="faq-answer">
+              Images are generated in under 100ms thanks to Vercel Edge Functions.
+              Images are then cached at the edge for 24 hours.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo-icon" style="width: 32px; height: 32px; font-size: 1rem;">🔥</div>
+        OG Forge
+      </div>
+      <p class="footer-copy">© 2026 OG Forge. Built with ❤️ by UniverseCreator</p>
+      <div class="footer-links">
+        <a href="#">GitHub</a>
+        <a href="#">Twitter</a>
+        <a href="#">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Demo preview functionality
+    function generatePreview() {
+      const title = document.getElementById('input-title').value || 'Your Title Here';
+      const subtitle = document.getElementById('input-subtitle').value || 'Your subtitle goes here';
+      const template = document.getElementById('input-template').value;
+      const theme = document.getElementById('input-theme').value;
+
+      const previewTitle = document.getElementById('preview-title');
+      const previewSubtitle = document.getElementById('preview-subtitle');
+      const preview = document.querySelector('.demo-preview');
+
+      previewTitle.textContent = title;
+      previewSubtitle.textContent = subtitle;
+
+      // Theme colors
+      const themes = {
+        dark: 'linear-gradient(135deg, #1a1a2e, #16213e)',
+        light: 'linear-gradient(135deg, #f8fafc, #e2e8f0)',
+        brand: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        minimal: 'linear-gradient(135deg, #f3f4f6, #e5e7eb)'
+      };
+
+      preview.style.background = themes[theme] || themes.dark;
+    }
+
+    // Purchase button
+    function purchase() {
+      alert('Checkout coming soon! Use the demo above to test the API.');
+    }
+
+    // Initialize demo on load
+    window.addEventListener('DOMContentLoaded', generatePreview);
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
