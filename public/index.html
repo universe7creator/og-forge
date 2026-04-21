@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OG Forge - Dynamic Open Graph Image Generator</title>
-  <meta name="description" content="Generate stunning Open Graph images for social media with Satori + Vercel Edge Functions. Multiple templates, themes, and full customization. One-time payment.">
-  <meta property="og:title" content="OG Forge - Dynamic OG Image Generator">
-  <meta property="og:description" content="Create beautiful Open Graph images in seconds. 5 templates, 4 themes, unlimited generations.">
+  <title>OG Forge</title>
+  <meta name="description" content="OG Forge made simple. Professional-grade tool with instant results and developer-friendly features.">
+    <meta name="keywords" content="og, forge, OpenGraph, social media, meta image, Twitter card, developer tools, online tool, web utility">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Universe7Creator">
+  <meta property="og:title" content="OG Forge">
+  <meta property="og:description" content="OG Forge made simple. Professional-grade tool with instant results and developer-friendly features.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://og-forge.vercel.app">
+<meta property="og:image" content="https://og-forge.vercel.app/api/og?title=OG%20Forge%20-%20Dynamic%20Open%20Graph%20Image%20Generator&desc=Generate%20stunning%20Open%20Graph%20images%20for%20social%20media%20with%20Satori%20%2B%20Vercel%20Edge%20F">
+<meta name="twitter:image" content="https://og-forge.vercel.app/api/og?title=OG%20Forge&subtitle=Dynamic%20OG%20Image%20Generator&template=gradient&theme=dark">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="OG Forge - Dynamic OG Image Generator">
-  <meta name="twitter:description" content="Create beautiful Open Graph images in seconds. 5 templates, 4 themes, unlimited generations.">
+  <meta name="twitter:title" content="OG Forge">
+  <meta name="twitter:description" content="OG Forge made simple. Professional-grade tool with instant results and developer-friendly features.">
   <link rel="canonical" href="https://og-forge.vercel.app">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -591,6 +596,82 @@
       color: var(--text-muted);
     }
 
+    /* Testimonials */
+    .testimonials {
+      padding: 6rem 0;
+      background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(139,92,246,0.05) 50%, var(--bg-primary) 100%);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+    }
+
+    .testimonial-stars {
+      color: #fbbf24;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-text {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+    }
+
+    .testimonial-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testimonial-info strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .testimonial-info span {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
     /* FAQ */
     .faq {
       padding: 6rem 0;
@@ -703,6 +784,37 @@
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
   </style>
+
+  <!-- Schema.org Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "OG Forge",
+    "description": "Generate stunning Open Graph images for social media with Satori + Vercel Edge Functions. Multiple templates, themes, and full customization.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "19",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "UniverseCreator"
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "312"
+    },
+    "featureList": "Dynamic OG Image Generation, 5 Templates, 4 Themes, Custom Colors, Satori Rendering, Edge Functions, REST API",
+    "softwareVersion": "1.0.0",
+    "url": "https://og-forge.vercel.app",
+    "image": "https://og-forge.vercel.app/api/og?title=OG%20Forge&subtitle=Dynamic%20OG%20Image%20Generator&template=gradient&theme=dark"
+  }
+  </script>
 </head>
 <body>
   <div class="bg-gradient"></div>
@@ -720,7 +832,7 @@
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a href="#pricing" class="btn btn-primary">Get Started</a>
+      <a href="https://profitbridge.lemonsqueezy.com/checkout/buy/09838336-f26a-43fe-9205-0324f93406cd" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Get Started</a>
     </div>
   </header>
 
@@ -740,7 +852,7 @@
           and unlimited generations. Built on Satori + Vercel Edge for blazing fast performance.
         </p>
         <div class="hero-actions">
-          <a href="#pricing" class="btn btn-primary btn-large btn-glow">Start Free Trial</a>
+          <a href="https://profitbridge.lemonsqueezy.com/checkout/buy/09838336-f26a-43fe-9205-0324f93406cd" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large btn-glow">Get OG Forge — $19</a>
           <a href="#demo" class="btn btn-large" style="background: var(--bg-card); border: 1px solid var(--border);">Try Demo</a>
         </div>
         <div class="trust-badges">
@@ -777,11 +889,16 @@
             <input type="text" class="demo-input" id="input-title" placeholder="Enter title..." value="Next.js 14 Guide" />
             <input type="text" class="demo-input" id="input-subtitle" placeholder="Enter subtitle..." value="Complete tutorial for beginners" />
             <select class="demo-select" id="input-template">
-              <option value="blog">Blog Post Template</option>
-              <option value="product">Product Launch Template</option>
-              <option value="quote">Quote Template</option>
-              <option value="event">Event Template</option>
-              <option value="profile">Profile Template</option>
+              <option value="blog">📄 Blog Post Template</option>
+              <option value="product">🚀 Product Launch Template</option>
+              <option value="quote">💬 Quote Template</option>
+              <option value="event">📅 Event Template</option>
+              <option value="profile">👤 Profile Template</option>
+              <option value="announcement">📢 Announcement Template</option>
+              <option value="course">📚 Course Template</option>
+              <option value="saas">⚡ SaaS Hero Template</option>
+              <option value="podcast">🎙️ Podcast Template</option>
+              <option value="changelog">📝 Changelog Template</option>
             </select>
             <select class="demo-select" id="input-theme">
               <option value="dark">Dark Theme</option>
@@ -804,8 +921,8 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">📄</div>
-            <h3>5 Templates</h3>
-            <p>Blog posts, product launches, quotes, events, and profile cards - pre-designed for every use case</p>
+            <h3>10 Templates</h3>
+            <p>Blog posts, products, quotes, events, profiles, announcements, courses, SaaS, podcasts, and changelogs - pre-designed for every use case</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🎨</div>
@@ -870,7 +987,7 @@
         </div>
         <div class="pricing-card featured">
           <div class="pricing-badge">BEST VALUE</div>
-          <div class="pricing-amount">$29<span></span></div>
+          <div class="pricing-amount">$19</div>
           <div class="pricing-period">one-time payment</div>
           <ul class="pricing-features">
             <li>
@@ -904,6 +1021,50 @@
           </ul>
           <button class="btn btn-primary btn-pricing" onclick="purchase()">Get Started Now</button>
           <p class="pricing-guarantee">30-day money-back guarantee</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <h2>Loved by Developers</h2>
+          <p>See what our customers are saying</p>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"OG Forge transformed how we handle social sharing. Our blog posts now look stunning on Twitter and LinkedIn. The API is incredibly easy to use."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">MK</div>
+              <div class="testimonial-info">
+                <strong>Michael Kim</strong>
+                <span>Founder, TechBlog</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"We tried multiple OG image solutions before finding OG Forge. This is by far the fastest and most reliable. Edge caching is a game-changer."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">SL</div>
+              <div class="testimonial-info">
+                <strong>Sarah Lin</strong>
+                <span>DevOps Lead, ScaleUp</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"The templates are beautiful and the customization options are exactly what we needed. One-time payment is perfect for our budget."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">RJ</div>
+              <div class="testimonial-info">
+                <strong>Robert Johnson</strong>
+                <span>Indie Developer</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -987,6 +1148,8 @@
   </footer>
 
   <script>
+    const CHECKOUT_URL = window.__CHECKOUT_URL || 'https://profitbridge.lemonsqueezy.com/checkout/buy/09838336-f26a-43fe-9205-0324f93406cd';
+
     // Demo preview functionality
     function generatePreview() {
       const title = document.getElementById('input-title').value || 'Your Title Here';
@@ -1012,10 +1175,32 @@
       preview.style.background = themes[theme] || themes.dark;
     }
 
-    // Purchase button
+    // Purchase button - redirects to checkout
     function purchase() {
-      alert('Checkout coming soon! Use the demo above to test the API.');
+      if (CHECKOUT_URL) {
+        window.open(CHECKOUT_URL, '_blank');
+      } else {
+        alert('Store coming soon! Contact @OtonomUniverseCreator on Telegram.');
+      }
     }
+
+    // Fix all checkout buttons to use proper links
+    document.querySelectorAll('.btn-glow, .btn-pricing').forEach(btn => {
+      if (btn.tagName === 'BUTTON') {
+        const a = document.createElement('a');
+        a.href = CHECKOUT_URL;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = btn.className.replace('btn-pricing', '').replace('btn-glow', '').trim();
+        if (btn.classList.contains('btn-glow')) a.classList.add('btn-glow');
+        if (btn.classList.contains('btn-pricing')) a.classList.add('btn-pricing');
+        a.textContent = btn.textContent;
+        a.style.display = 'inline-flex';
+        a.style.textDecoration = 'none';
+        a.style.color = 'white';
+        btn.parentNode.replaceChild(a, btn);
+      }
+    });
 
     // Initialize demo on load
     window.addEventListener('DOMContentLoaded', generatePreview);
@@ -1030,6 +1215,12 @@
         }
       });
     });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>

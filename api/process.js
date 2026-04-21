@@ -25,6 +25,26 @@ const TEMPLATES = {
   profile: (props) => ({
     layout: 'horizontal',
     elements: ['avatar', 'name', 'title', 'bio']
+  }),
+  announcement: (props) => ({
+    layout: 'centered',
+    elements: ['badge', 'title', 'subtitle', 'cta']
+  }),
+  course: (props) => ({
+    layout: 'split',
+    elements: ['thumbnail', 'title', 'instructor', 'duration', 'level']
+  }),
+  saas: (props) => ({
+    layout: 'hero',
+    elements: ['logo', 'headline', 'tagline', 'features', 'cta']
+  }),
+  podcast: (props) => ({
+    layout: 'centered',
+    elements: ['cover', 'title', 'episode', 'hosts']
+  }),
+  changelog: (props) => ({
+    layout: 'vertical',
+    elements: ['version', 'title', 'highlights', 'date']
   })
 };
 
